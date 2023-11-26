@@ -1,14 +1,17 @@
-const gridDivEl = document.querySelector(".grid");
-
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
 function createDivs(rows, cols) {
+  const gridDivEl = document.querySelector(".grid");
   const gridWidth = gridDivEl.offsetWidth;
   const gridHeight = gridDivEl.offsetHeight;
   const cellWidth = gridWidth / cols;
   const cellHeight = gridHeight / rows;
+
+  const getRandomColor = () =>
+    `rgb(${getRandomInt(255)}, ${getRandomInt(255)}, ${getRandomInt(255)})`;
+
   let isDragging = false;
   for (let i = 0; i < rows; i++) {
     const rowDiv = document.createElement("div");
@@ -26,9 +29,7 @@ function createDivs(rows, cols) {
       colDiv.addEventListener("mousedown", (event) => {
         event.preventDefault();
         isDragging = true;
-        colDiv.style.backgroundColor = `rgb(${getRandomInt(
-          255
-        )}, ${getRandomInt(255)}, ${getRandomInt(255)})`;
+        colDiv.style.backgroundColor = getRandomColor();
       });
 
       document.addEventListener("mouseup", () => {
@@ -37,9 +38,7 @@ function createDivs(rows, cols) {
 
       colDiv.addEventListener("mouseover", () => {
         if (isDragging) {
-          colDiv.style.backgroundColor = `rgb(${getRandomInt(
-            255
-          )}, ${getRandomInt(255)}, ${getRandomInt(255)})`;
+          colDiv.style.backgroundColor = getRandomColor();
         }
       });
 
@@ -51,8 +50,6 @@ function createDivs(rows, cols) {
       });
 
       rowDiv.appendChild(colDiv);
-
-      // colDiv.style.backgroundColor = "black";
     }
   }
 }
