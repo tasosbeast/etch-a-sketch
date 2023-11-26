@@ -15,3 +15,7 @@ This project is a dynamic, interactive grid-based color game implemented in Java
 ## How It Works
 
 The game uses event listeners for mouse down, mouse up, and mouse over events to detect when the user is clicking and dragging the mouse. It also uses the `preventDefault` method to prevent the browser's default drag-and-drop behavior. The code is modular and organized into functions for creating the grid, clearing the grid, and changing the grid size.
+
+## Live Preview
+
+https://tasosbeast.github.io/etch-a-sketch/
