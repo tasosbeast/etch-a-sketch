@@ -66,4 +66,4 @@ clearBtn.addEventListener("click", clearGrid);
 const changeSizeBtn = document.querySelector(".resize");
 changeSizeBtn.addEventListener("click", changeGridSize);
 
-createDivs(15, 15);
+createDivs(10, 10);
