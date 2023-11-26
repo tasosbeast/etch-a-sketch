@@ -64,15 +64,15 @@ function clearGrid() {
 
 function changeGridSize() {
   const newSize = Number(prompt("Enter new size"));
-  const gridItems = document.querySelectorAll(".grid-item");
-  gridItems.forEach((item) => {
-    item.remove();
-  });
+  const gridDivEl = document.querySelector(".grid");
+
   if (newSize > 100) {
     alert("Please enter a number less than 100");
   } else if (newSize < 1) {
     alert("Please enter a number greater than 0");
   } else {
+    gridDivEl.innerHTML = "";
+
     createDivs(newSize, newSize);
   }
 }
