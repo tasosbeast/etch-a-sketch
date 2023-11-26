@@ -9,7 +9,7 @@ function createDivs(rows, cols) {
   const gridHeight = gridDivEl.offsetHeight;
   const cellWidth = gridWidth / cols;
   const cellHeight = gridHeight / rows;
-
+  let isDragging = false;
   for (let i = 0; i < rows; i++) {
     const rowDiv = document.createElement("div");
     rowDiv.style.display = "flex";
@@ -22,16 +22,32 @@ function createDivs(rows, cols) {
       colDiv.style.height = `${cellHeight}px`;
 
       // Add your event listeners and other styles here
-      colDiv.addEventListener("mouseover", () => {
+
+      colDiv.addEventListener("mousedown", (event) => {
+        event.preventDefault();
+        isDragging = true;
         colDiv.style.backgroundColor = `rgb(${getRandomInt(
           255
         )}, ${getRandomInt(255)}, ${getRandomInt(255)})`;
-        colDiv.style.transition = "background-color 0.1s ease";
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+
+      colDiv.addEventListener("mouseover", () => {
+        if (isDragging) {
+          colDiv.style.backgroundColor = `rgb(${getRandomInt(
+            255
+          )}, ${getRandomInt(255)}, ${getRandomInt(255)})`;
+        }
       });
 
       colDiv.addEventListener("mouseout", () => {
-        colDiv.style.backgroundColor = "black";
-        colDiv.style.transition = "background-color 5s ease";
+        if (isDragging) {
+          colDiv.style.backgroundColor = `black`;
+          colDiv.style.transition = "background-color 1s ease";
+        }
       });
 
       rowDiv.appendChild(colDiv);
