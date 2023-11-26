@@ -5,18 +5,22 @@ function getRandomInt(max) {
 }
 
 function createDivs(rows, cols) {
+  const gridWidth = gridDivEl.offsetWidth;
+  const gridHeight = gridDivEl.offsetHeight;
+  const cellWidth = gridWidth / cols;
+  const cellHeight = gridHeight / rows;
+
   for (let i = 0; i < rows; i++) {
     const rowDiv = document.createElement("div");
     rowDiv.style.display = "flex";
-    rowDiv.style.flexDirection = "row";
-    rowDiv.style.justifyContent = "center";
-    rowDiv.style.alignItems = "center";
-    rowDiv.style.width = "100%";
     gridDivEl.appendChild(rowDiv);
 
     for (let j = 0; j < cols; j++) {
       const colDiv = document.createElement("div");
       colDiv.classList.add("grid-item");
+      colDiv.style.width = `${cellWidth}px`;
+      colDiv.style.height = `${cellHeight}px`;
+
       // Add your event listeners and other styles here
       colDiv.addEventListener("mouseover", () => {
         colDiv.style.backgroundColor = `rgb(${getRandomInt(
@@ -40,13 +44,13 @@ function createDivs(rows, cols) {
 function clearGrid() {
   const gridItems = document.querySelectorAll(".grid-item");
   gridItems.forEach((item) => {
-    item.style.backgroundColor = "black";
+    item.style.backgroundColor = "white";
     item.style.transition = "background-color 1s ease";
   });
 }
 
 function changeGridSize() {
-  const newSize = prompt("Enter new size");
+  const newSize = Number(prompt("Enter new size"));
   const gridItems = document.querySelectorAll(".grid-item");
   gridItems.forEach((item) => {
     item.remove();
@@ -59,6 +63,13 @@ function changeGridSize() {
     createDivs(newSize, newSize);
   }
 }
+
+const overlay = document.querySelector(".overlay");
+const startButton = document.querySelector(".start-button");
+
+startButton.addEventListener("click", function () {
+  overlay.style.display = "none";
+});
 
 const clearBtn = document.querySelector(".clear");
 clearBtn.addEventListener("click", clearGrid);
